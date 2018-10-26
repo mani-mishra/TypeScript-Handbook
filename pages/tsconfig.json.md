@@ -82,7 +82,7 @@ If a segment of a glob pattern includes only `*` or `.*`, then only files with s
 
 If the `"files"` and `"include"` are both left unspecified, the compiler defaults to including all TypeScript (`.ts`, `.d.ts` and `.tsx`) files in the containing directory and subdirectories except those excluded using the `"exclude"` property. JS files (`.js` and `.jsx`) are also included if `allowJs` is set to true.
 If the `"files"` or `"include"` properties are specified, the compiler will instead include the union of the files included by those two properties.
-Files in the directory specified using the `"outDir"` compiler option are excluded as long as `"exclude"` property is not specfied.
+Files in the directory specified using the `"outDir"` compiler option are excluded as long as `"exclude"` property is not specified.
 
 Files included using `"include"` can be filtered using the `"exclude"` property.
 However, files included explicitly using the `"files"` property are always included regardless of `"exclude"`.
@@ -92,7 +92,7 @@ Any files that are referenced by files included via the `"files"` or `"include"`
 Similarly, if a file `B.ts` is referenced by another file `A.ts`, then `B.ts` cannot be excluded unless the referencing file `A.ts` is also specified in the `"exclude"` list.
 
 Please note that the compiler does not include files that can be possible outputs; e.g. if the input includes `index.ts`, then `index.d.ts` and `index.js` are excluded.
-In general, having files that differ only in extension next to each other is not recomended.
+In general, having files that differ only in extension next to each other is not recommended.
 
 A `tsconfig.json` file is permitted to be completely empty, which compiles all files included by default (as described above) with the default compiler options.
 

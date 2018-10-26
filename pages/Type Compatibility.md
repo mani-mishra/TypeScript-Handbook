@@ -19,7 +19,7 @@ let p: Named;
 p = new Person();
 ```
 
-In nominally-typed languages like C# or Java, the equivalent code would be an error because the `Person` class does not explicitly describe itself as being an implementor of the `Named` interface.
+In nominally-typed languages like C# or Java, the equivalent code would be an error because the `Person` class does not explicitly describe itself as being an implementer of the `Named` interface.
 
 TypeScript's structural type system was designed based on how JavaScript code is typically written.
 Because JavaScript widely uses anonymous objects like function expressions and object literals, it's much more natural to represent the kinds of relationships found in JavaScript libraries with a structural type system instead of a nominal one.
@@ -50,7 +50,7 @@ The same rule for assignment is used when checking function call arguments:
 
 ```ts
 function greet(n: Named) {
-    alert("Hello, " + n.name);
+    console.log("Hello, " + n.name);
 }
 greet(y); // OK
 ```
@@ -102,7 +102,7 @@ let x = () => ({name: "Alice"});
 let y = () => ({name: "Alice", location: "Seattle"});
 
 x = y; // OK
-y = x; // Error because x() lacks a location property
+y = x; // Error, because x() lacks a location property
 ```
 
 The type system enforces that the source function's return type be a subtype of the target type's return type.
@@ -172,7 +172,7 @@ enum Status { Ready, Waiting };
 enum Color { Red, Blue, Green };
 
 let status = Status.Ready;
-status = Color.Green;  //error
+status = Color.Green;  // Error
 ```
 
 # Classes
@@ -195,8 +195,8 @@ class Size {
 let a: Animal;
 let s: Size;
 
-a = s;  //OK
-s = a;  //OK
+a = s;  // OK
+s = a;  // OK
 ```
 
 ## Private and protected members in classes
@@ -216,7 +216,7 @@ interface Empty<T> {
 let x: Empty<number>;
 let y: Empty<string>;
 
-x = y;  // okay, y matches structure of x
+x = y;  // OK, because y matches structure of x
 ```
 
 In the above, `x` and `y` are compatible because their structures do not use the type argument in a differentiating way.
@@ -229,7 +229,7 @@ interface NotEmpty<T> {
 let x: NotEmpty<number>;
 let y: NotEmpty<string>;
 
-x = y;  // error, x and y are not compatible
+x = y;  // Error, because x and y are not compatible
 ```
 
 In this way, a generic type that has its type arguments specified acts just like a non-generic type.
@@ -248,17 +248,18 @@ let reverse = function<U>(y: U): U {
     // ...
 }
 
-identity = reverse;  // Okay because (x: any)=>any matches (y: any)=>any
+identity = reverse;  // OK, because (x: any) => any matches (y: any) => any
 ```
 
 # Advanced Topics
 
 ## Subtype vs Assignment
 
-So far, we've used 'compatible', which is not a term defined in the language spec.
+So far, we've used "compatible", which is not a term defined in the language spec.
 In TypeScript, there are two kinds of compatibility: subtype and assignment.
-These differ only in that assignment extends subtype compatibility with rules to allow assignment to and from `any` and to and from enum with corresponding numeric values.
+These differ only in that assignment extends subtype compatibility with rules to allow assignment to and from `any`, and to and from `enum` with corresponding numeric values.
 
 Different places in the language use one of the two compatibility mechanisms, depending on the situation.
-For practical purposes, type compatibility is dictated by assignment compatibility even in the cases of the `implements` and `extends` clauses.
+For practical purposes, type compatibility is dictated by assignment compatibility, even in the cases of the `implements` and `extends` clauses.
+
 For more information, see the [TypeScript spec](https://github.com/Microsoft/TypeScript/blob/master/doc/spec.md).
